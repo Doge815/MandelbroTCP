@@ -1,12 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MandelbroTCP.Base
 {
 
-    public struct Color
+    public class Color
     {
         //Todo: custom color depth
-        uint Red, Green, Blue;
+        public uint Red, Green, Blue;
+
+
+        public override bool Equals(object obj)
+        {
+            return obj is Color color &&
+                   Red == color.Red &&
+                   Green == color.Green &&
+                   Blue == color.Blue;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Red, Green, Blue);
+        }
     }
 
     public class PixelCollection
@@ -38,6 +53,19 @@ namespace MandelbroTCP.Base
         {
             get => Pixels[x, y];
             set => Pixels[x, y] = value;
+        }
+
+        public Color[,] GetColors() => Pixels;
+
+        public override bool Equals(object obj)
+        {
+            return obj is PixelCollection collection &&
+                   EqualityComparer<Color[,]>.Default.Equals(Pixels, collection.Pixels);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Pixels);
         }
     }
 }
