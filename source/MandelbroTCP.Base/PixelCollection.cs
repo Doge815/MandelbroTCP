@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+using System.Numerics;
 
 namespace MandelbroTCP.Base
 {
@@ -18,6 +21,24 @@ namespace MandelbroTCP.Base
                    Blue == color.Blue;
         }
 
+        public string Serialize()
+        {
+            return (Red.ToString() + '|' + Green.ToString() + '|' + Blue.ToString());
+        }
+
+        private void Deserialize(string serializedColor)
+        {
+            uint[] vals = serializedColor.Split('|').Select(x => UInt32.Parse(x)).ToArray();
+            Red = vals[0];
+            Green = vals[1];
+            Blue = vals[2];
+        }
+
+
+        public Color(string serializedColor)
+        {
+            Deserialize(serializedColor);
+        }
         public override int GetHashCode()
         {
             return HashCode.Combine(Red, Green, Blue);
@@ -31,7 +52,13 @@ namespace MandelbroTCP.Base
 
         public string Serialize()
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(Pixels.GetLength(0).ToString()).Append('|').Append(Pixels.GetLength(1).ToString()).Append('\n');
+            foreach(Color c in Pixels)
+            {
+                sb.Append(c.Serialize() + "#");
+            }
+            return sb.ToString();
         }
 
         private void Deserialize(string serializedPixelCollection)

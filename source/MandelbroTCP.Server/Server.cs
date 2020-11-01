@@ -44,7 +44,7 @@ namespace MandelbroTCP.Server
                 }
             }
 
-            BrotInfo vals = BrotInfo.Parse(requestString);
+            BrotInfo vals = new BrotInfo(requestString);
             PixelCollection brot = MandelbroTCP.Server.Calc.Brot.GetBrot(vals);
             string serializedBrot = brot.Serialize();
 
