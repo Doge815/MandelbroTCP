@@ -20,6 +20,8 @@ namespace MandelbroTCP.Base.Extensions
 
         public static BigInteger NextBigInteger(this Random rand, int length)
         {
+            if (rand is null)
+                throw new ArgumentNullException(nameof(rand));
             byte[] data = new byte[length];
             rand.NextBytes(data);
             return new BigInteger(data);
@@ -27,6 +29,8 @@ namespace MandelbroTCP.Base.Extensions
 
         public static Fraction NextFraction(this Random rand, int length)
         {
+            if (rand is null)
+                throw new ArgumentNullException(nameof(rand));
             BigInteger num = rand.NextBigInteger(length);
             BigInteger denum = rand.NextBigInteger(length);
             return new Fraction(num, denum);

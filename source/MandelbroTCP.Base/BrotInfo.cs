@@ -8,15 +8,16 @@ namespace MandelbroTCP.Base
 {
     public class BrotInfo
     {
-        public Fraction PosX, PosY, Zoom, SizeX, SizeY;
+        public Fraction PosX, PosY, Zoom;
+        public uint SizeX, SizeY;
 
         public BrotInfo()
         {
             PosX = new Fraction();
             PosY = new Fraction();
             Zoom = new Fraction();
-            SizeX = new Fraction();
-            SizeY = new Fraction();
+            SizeX = 1;
+            SizeY = 1;
         }
         public BrotInfo(string serializedBroInfo)
         {
@@ -46,8 +47,8 @@ namespace MandelbroTCP.Base
             PosX = vals[0];
             PosY = vals[1];
             Zoom = vals[2];
-            SizeX = vals[3];
-            SizeY = vals[4];
+            SizeX = (uint)vals[3];
+            SizeY = (uint)vals[4];
         }
     }
 }

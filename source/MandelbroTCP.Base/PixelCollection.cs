@@ -96,7 +96,7 @@ namespace MandelbroTCP.Base
             Deserialize(serializedPixelCollection);
         }
 
-        public PixelCollection(int x, int y)
+        public PixelCollection(uint x, uint y)
         {
             Pixels = new Color[x, y];
             for (int i = 0; i < x; i++)

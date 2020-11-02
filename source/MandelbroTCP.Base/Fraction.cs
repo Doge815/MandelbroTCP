@@ -346,5 +346,10 @@ namespace MandelbroTCP.Base
         {
             return ((decimal)frac.Numerator / (decimal)frac.Denominator);
         }
+
+        public static explicit operator uint(Fraction frac)
+        {
+            return ((uint)frac.Numerator / (uint)frac.Denominator);
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace MandelbroTCP.UnitTest
         [TestMethod]
         public void TestPixelCollectionSerialization()
         {
-            PixelCollection collection = new PixelCollection(random.Next(1, 3841), random.Next(1, 2161));
+            PixelCollection collection = new PixelCollection((uint)random.Next(1, 3841), (uint)random.Next(1, 2161));
             for (int i = 0; i < collection.GetColors().GetLength(0); i++)
                 for (int j = 0; j < collection.GetColors().GetLength(1); j++)
                 {
@@ -41,8 +41,8 @@ namespace MandelbroTCP.UnitTest
 
             info.PosX = random.NextFraction(size);
             info.PosY = random.NextFraction(size);
-            info.SizeX = random.NextFraction(size);
-            info.SizeY = random.NextFraction(size);
+            info.SizeX = random.NextUint();
+            info.SizeY = random.NextUint();
             info.Zoom = random.NextFraction(size);
 
             string serializedInfo = info.Serialize();
