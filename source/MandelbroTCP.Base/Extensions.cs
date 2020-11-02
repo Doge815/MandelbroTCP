@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace MandelbroTCP.Base.Extensions
@@ -21,6 +23,23 @@ namespace MandelbroTCP.Base.Extensions
             byte[] data = new byte[length];
             rand.NextBytes(data);
             return new BigInteger(data);
+        }
+
+        public static bool IsEqual<T> (this T[,] obj, T[,] sec)
+        {
+            if (obj.GetLength(0) != sec.GetLength(0) || obj.GetLength(1) != sec.GetLength(1)) return false;
+            int x = 0, y = 0;
+            for(int i = 0; i < obj.Length; i++)
+            {
+                if (!obj[x, y].Equals(sec[x, y])) return false;
+                y++;
+                if(y == obj.GetLength(1))
+                {   
+                    y = 0;
+                    x++;
+                }
+            }
+            return true;
         }
     }
 }

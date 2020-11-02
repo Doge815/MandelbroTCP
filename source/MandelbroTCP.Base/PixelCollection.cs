@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Numerics;
+using System.Diagnostics;
+using MandelbroTCP.Base.Extensions;
 
 namespace MandelbroTCP.Base
 {
@@ -28,10 +30,17 @@ namespace MandelbroTCP.Base
 
         private void Deserialize(string serializedColor)
         {
-            uint[] vals = serializedColor.Split('|').Select(x => UInt32.Parse(x)).ToArray();
-            Red = vals[0];
-            Green = vals[1];
-            Blue = vals[2];
+            try
+            {
+                uint[] vals = serializedColor.Split('|').Select(x => UInt32.Parse(x)).ToArray();
+                Red = vals[0];
+                Green = vals[1];
+                Blue = vals[2];
+            }
+            catch
+            {
+                Debug.Print("a");
+            }
         }
 
         public Color()
@@ -70,7 +79,7 @@ namespace MandelbroTCP.Base
             uint[] size = parts[0].Split('|').Select(x => UInt32.Parse(x)).ToArray();
             Pixels = new Color[size[0], size[1]];
 
-            string[] colors = parts[1].Split('#');
+            string[] colors = parts[1].Split('#', StringSplitOptions.RemoveEmptyEntries);
 
             int x = 0, y = 0;
 
@@ -110,12 +119,12 @@ namespace MandelbroTCP.Base
         public override bool Equals(object obj)
         {
             return obj is PixelCollection collection &&
-                   EqualityComparer<Color[,]>.Default.Equals(Pixels, collection.Pixels);
+                   Pixels.IsEqual(collection.Pixels);
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Pixels);
+            return 1;
         }
     }
 }
