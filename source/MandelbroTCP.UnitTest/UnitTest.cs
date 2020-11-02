@@ -16,12 +16,15 @@ namespace MandelbroTCP.UnitTest
         public void TestPixelCollectionSerialization()
         {
             PixelCollection collection = new PixelCollection(random.Next(1, 3841), random.Next(1, 2161));
-            foreach(Color c in collection.GetColors())
-            {
-                c.Red = random.NextUint();
-                c.Green = random.NextUint();
-                c.Blue = random.NextUint();
-            }
+            for (int i = 0; i < collection.GetColors().GetLength(0); i++)
+                for (int j = 0; j < collection.GetColors().GetLength(1); j++)
+                {
+                    collection[i, j] = new Color();
+                    collection[i, j].Red = random.NextUint();
+                    collection[i, j].Green = random.NextUint();
+                    collection[i, j].Blue = random.NextUint();
+                }
+                    
 
             string serializedCollection = collection.Serialize();
             PixelCollection deserializedSerializedCollection = new PixelCollection(serializedCollection);

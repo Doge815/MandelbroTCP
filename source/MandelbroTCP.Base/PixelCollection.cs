@@ -34,7 +34,10 @@ namespace MandelbroTCP.Base
             Blue = vals[2];
         }
 
+        public Color()
+        {
 
+        }
         public Color(string serializedColor)
         {
             Deserialize(serializedColor);
@@ -56,14 +59,31 @@ namespace MandelbroTCP.Base
             sb.Append(Pixels.GetLength(0).ToString()).Append('|').Append(Pixels.GetLength(1).ToString()).Append('\n');
             foreach(Color c in Pixels)
             {
-                sb.Append(c.Serialize() + "#");
+                sb.Append(c.Serialize() + '#');
             }
             return sb.ToString();
         }
 
         private void Deserialize(string serializedPixelCollection)
         {
-            throw new NotImplementedException();
+            string[] parts = serializedPixelCollection.Split('\n');
+            uint[] size = parts[0].Split('|').Select(x => UInt32.Parse(x)).ToArray();
+            Pixels = new Color[size[0], size[1]];
+
+            string[] colors = parts[1].Split('#');
+
+            int x = 0, y = 0;
+
+            foreach(string s in colors)
+            {
+                Pixels[x, y] = new Color(s);
+                y++;
+                if(y == Pixels.GetLength(1))
+                {
+                    y = 0;
+                    x++;
+                }
+            }
         }
 
         public PixelCollection(string serializedPixelCollection)
@@ -74,6 +94,9 @@ namespace MandelbroTCP.Base
         public PixelCollection(int x, int y)
         {
             Pixels = new Color[x, y];
+            for (int i = 0; i < x; i++)
+                for (int j = 0; j < y; j++)
+                    Pixels[i, j] = new Color();
         }
 
         public Color this[int x, int y]
