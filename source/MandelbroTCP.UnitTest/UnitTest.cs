@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MandelbroTCP.Base;
 using MandelbroTCP.Base.Extensions;
+using MandelbroTCP.Server.Calc;
 using System;
 using System.Runtime.CompilerServices;
 
@@ -41,9 +42,10 @@ namespace MandelbroTCP.UnitTest
 
             info.PosX = random.NextFraction(size);
             info.PosY = random.NextFraction(size);
+            info.Zoom = random.NextFraction(size);
             info.SizeX = random.NextUint();
             info.SizeY = random.NextUint();
-            info.Zoom = random.NextFraction(size);
+            info.Precision = random.NextUint();
 
             string serializedInfo = info.Serialize();
             BrotInfo deserializedSerializedInfo = new BrotInfo(serializedInfo);

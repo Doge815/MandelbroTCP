@@ -9,7 +9,7 @@ namespace MandelbroTCP.Base
     public class BrotInfo
     {
         public Fraction PosX, PosY, Zoom;
-        public uint SizeX, SizeY;
+        public uint SizeX, SizeY, Precision;
 
         public BrotInfo()
         {
@@ -18,6 +18,7 @@ namespace MandelbroTCP.Base
             Zoom = new Fraction();
             SizeX = 1;
             SizeY = 1;
+            Precision = 100;
         }
         public BrotInfo(string serializedBroInfo)
         {
@@ -31,13 +32,14 @@ namespace MandelbroTCP.Base
                 PosY.Equals(info.PosY) &&
                 Zoom.Equals(info.Zoom) &&
                 SizeX.Equals(info.SizeX) &&
-                SizeY.Equals(info.SizeY);
+                SizeY.Equals(info.SizeY) &&
+                Precision.Equals(info.Precision);
         }
 
         public string Serialize()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(PosX.ToString()).Append("|").Append(PosY.ToString()).Append("|").Append(Zoom.ToString()).Append("|").Append(SizeX.ToString()).Append("|").Append(SizeY.ToString());
+            sb.Append(PosX.ToString()).Append("|").Append(PosY.ToString()).Append("|").Append(Zoom.ToString()).Append("|").Append(SizeX.ToString()).Append("|").Append(SizeY.ToString()).Append("|").Append(Precision);
             return sb.ToString();
         }
 
@@ -49,6 +51,7 @@ namespace MandelbroTCP.Base
             Zoom = vals[2];
             SizeX = (uint)vals[3];
             SizeY = (uint)vals[4];
+            Precision = (uint)vals[5];
         }
     }
 }

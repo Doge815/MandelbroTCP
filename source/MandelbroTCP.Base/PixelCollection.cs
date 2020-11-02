@@ -30,17 +30,10 @@ namespace MandelbroTCP.Base
 
         private void Deserialize(string serializedColor)
         {
-            try
-            {
-                uint[] vals = serializedColor.Split('|').Select(x => UInt32.Parse(x)).ToArray();
-                Red = vals[0];
-                Green = vals[1];
-                Blue = vals[2];
-            }
-            catch
-            {
-                Debug.Print("a");
-            }
+            uint[] vals = serializedColor.Split('|').Select(x => UInt32.Parse(x)).ToArray();
+            Red = vals[0];
+            Green = vals[1];
+            Blue = vals[2];
         }
 
         public Color()
@@ -62,7 +55,7 @@ namespace MandelbroTCP.Base
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(Pixels.GetLength(0).ToString()).Append('|').Append(Pixels.GetLength(1).ToString()).Append('\n');
-            foreach(Color c in Pixels)
+            foreach (Color c in Pixels)
             {
                 sb.Append(c.Serialize() + '#');
             }
@@ -79,11 +72,11 @@ namespace MandelbroTCP.Base
 
             int x = 0, y = 0;
 
-            foreach(string s in colors)
+            foreach (string s in colors)
             {
                 Pixels[x, y] = new Color(s);
                 y++;
-                if(y == Pixels.GetLength(1))
+                if (y == Pixels.GetLength(1))
                 {
                     y = 0;
                     x++;
