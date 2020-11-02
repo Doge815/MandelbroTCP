@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Numerics;
 using MandelbroTCP.Base;
+using System.Net.Http.Headers;
 
 namespace MandelbroTCP.Server.Calc
 {

@@ -39,11 +39,11 @@ namespace MandelbroTCP.UnitTest
 
             const int size = 5;
 
-            info.PosX = random.NextBigInteger(size);
-            info.PosY = random.NextBigInteger(size);
-            info.SizeX = random.NextBigInteger(size);
-            info.SizeY = random.NextBigInteger(size);
-            info.Zoom = random.NextBigInteger(size);
+            info.PosX = random.NextFraction(size);
+            info.PosY = random.NextFraction(size);
+            info.SizeX = random.NextFraction(size);
+            info.SizeY = random.NextFraction(size);
+            info.Zoom = random.NextFraction(size);
 
             string serializedInfo = info.Serialize();
             BrotInfo deserializedSerializedInfo = new BrotInfo(serializedInfo);

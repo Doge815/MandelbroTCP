@@ -51,10 +51,6 @@ namespace MandelbroTCP.Base
         {
             Deserialize(serializedColor);
         }
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Red, Green, Blue);
-        }
     }
 
     public class PixelCollection

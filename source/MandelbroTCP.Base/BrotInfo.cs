@@ -6,13 +6,31 @@ using System.Linq;
 
 namespace MandelbroTCP.Base
 {
-    public struct BrotInfo
+    public class BrotInfo
     {
-        public BigInteger PosX, PosY, Zoom, SizeX, SizeY;
+        public Fraction PosX, PosY, Zoom, SizeX, SizeY;
 
+        public BrotInfo()
+        {
+            PosX = new Fraction();
+            PosY = new Fraction();
+            Zoom = new Fraction();
+            SizeX = new Fraction();
+            SizeY = new Fraction();
+        }
         public BrotInfo(string serializedBroInfo)
         {
             Deserialize(serializedBroInfo);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is BrotInfo info &&
+                PosX.Equals(info.PosX) &&
+                PosY.Equals(info.PosY) &&
+                Zoom.Equals(info.Zoom) &&
+                SizeX.Equals(info.SizeX) &&
+                SizeY.Equals(info.SizeY);
         }
 
         public string Serialize()
@@ -24,7 +42,7 @@ namespace MandelbroTCP.Base
 
         private void Deserialize(string serializedBroInfo)
         {
-            BigInteger[] vals = serializedBroInfo.Split('|').Select(x => BigInteger.Parse(x)).ToArray();
+            Fraction[] vals = serializedBroInfo.Split('|').Select(x => Fraction.Parse(x)).ToArray();
             PosX = vals[0];
             PosY = vals[1];
             Zoom = vals[2];

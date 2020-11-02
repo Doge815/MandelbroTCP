@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace MandelbroTCP.Base
 {
-    public struct Fraction : IEquatable<Fraction>
+    public class Fraction : IEquatable<Fraction>
     {
         BigInteger _numerator;
         public BigInteger Numerator
@@ -12,7 +12,7 @@ namespace MandelbroTCP.Base
             private set { _numerator = value; }
         }
 
-        BigInteger _denominator;
+        BigInteger _denominator = 1;
         public BigInteger Denominator
         {
             get { return _denominator == 0 ? 1 : _denominator; }
@@ -25,6 +25,11 @@ namespace MandelbroTCP.Base
             }
         }
 
+        public Fraction()
+        {
+            _numerator = 0;
+            _denominator = 1;
+        }
         public Fraction(BigInteger value)
         {
             _numerator = value;
@@ -70,7 +75,7 @@ namespace MandelbroTCP.Base
 
         public bool Equals(Fraction other)
         {
-            if (other == null)
+            if (other is null)
                 return false;
 
             return (Numerator == other.Numerator && Denominator == other.Denominator);

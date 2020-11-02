@@ -25,6 +25,13 @@ namespace MandelbroTCP.Base.Extensions
             return new BigInteger(data);
         }
 
+        public static Fraction NextFraction(this Random rand, int length)
+        {
+            BigInteger num = rand.NextBigInteger(length);
+            BigInteger denum = rand.NextBigInteger(length);
+            return new Fraction(num, denum);
+        }
+
         public static bool IsEqual<T> (this T[,] obj, T[,] sec)
         {
             if (obj.GetLength(0) != sec.GetLength(0) || obj.GetLength(1) != sec.GetLength(1)) return false;
