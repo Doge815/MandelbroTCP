@@ -16,8 +16,8 @@
 
         public DrawingImage Bitmap { get; set; }
 
-        public int ImageWidth { get; } = 800;
-        public int ImageHeight { get; } = 800;
+        public uint ImageWidth { get; } = 800;
+        public uint ImageHeight { get; } = 800;
 
         public MainWindow()
         {
