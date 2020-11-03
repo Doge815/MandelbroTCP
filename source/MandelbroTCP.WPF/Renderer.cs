@@ -25,9 +25,9 @@
             //temporary serverless calculation
             PixelCollection brot = Brot.GetBrot(vals);
 
-            for(int x = 0; x < MainWindow.ImageWidth; x++)
+            for (int x = 0; x < MainWindow.ImageWidth; x++)
             {
-                for(int y = 0; y < MainWindow.ImageHeight; y++)
+                for (int y = 0; y < MainWindow.ImageHeight; y++)
                 {
                     Brush b = (brot.GetColors()[x, y] == new Base.Color() { Red = 0, Green = 0, Blue = 0 }) ? (Brushes.Black) : (Brushes.White);
                     drawingContext.DrawRectangle(b, null,
@@ -35,7 +35,7 @@
                 }
             }
 
-            
+
         }
     }
 }

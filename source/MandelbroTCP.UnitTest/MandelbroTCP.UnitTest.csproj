@@ -17,7 +17,6 @@
     <ProjectReference Include="..\MandelbroTCP.Base\MandelbroTCP.Base.csproj" />
     <ProjectReference Include="..\MandelbroTCP.Connector\MandelbroTCP.Connector.csproj" />
     <ProjectReference Include="..\MandelbroTCP.Server\MandelbroTCP.Server.csproj" />
-    <ProjectReference Include="..\MandelbroTCP.WPF\MandelbroTCP.WPF.csproj" />
   </ItemGroup>
 
 </Project>
