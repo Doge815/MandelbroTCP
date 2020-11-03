@@ -48,25 +48,45 @@ namespace MandelbroTCP.Server.Calc
 
             for(int i = 0; i < Info.SizeX; i++)
             {
-                for(int j = 0; j < Info.SizeY; j++)
+                for (int j = 0; j < Info.SizeY; j++)
                 {
                     Fraction x = startX + stepX * i;
                     Fraction y = startY + stepY * j;
 
-                    ComplexNumber cn = new ComplexNumber(x, y);
-                    ComplexNumber z = cn;
+                    ComplexNumber c = new ComplexNumber(x, y);
+                    ComplexNumber z = c;
                     uint iterations = 0;
 
-                    for(int k = 0; k < Info.Precision; k++)
+                    for (; iterations < Info.Precision; iterations++)
                     {
                         ComplexNumber z2 = new ComplexNumber(z.Real * z.Real - z.Imaginary * z.Imaginary, 2 * z.Real * z.Imaginary);
-                        z2.Real += cn.Real;
 
-                        z2.Imaginary += cn.Imaginary;
+                        //Todo: overload + operator
+                        z2.Real += c.Real;
+                        z2.Imaginary += c.Imaginary;
                         z = z2;
-                        iterations++;
+
                         if (z.Real * z.Real + z.Imaginary * z.Imaginary > 4)
                             break;
+                    }
+
+                    if (iterations == Info.Precision - 1)
+                    {
+                        brot.GetColors()[i, j] = new Color()
+                        {
+                            Red = 0,
+                            Green = 0,
+                            Blue = 0
+                        };
+                    }
+                    else
+                    {
+                        brot.GetColors()[i, j] = new Color()
+                        {
+                            Red = 255,
+                            Green = 255,
+                            Blue = 255
+                        };
                     }
                 }
             }
